@@ -1,0 +1,2015 @@
+<?xml version="1.0" encoding="UTF-8"?><SiebelMessage
+ MessageId=""
+ IntObjectName="EAI Data Map"
+ MessageType="Integration Object"
+ IntObjectFormat="Siebel Hierarchical"
+><ListOfEaiDataMap
+><EaiObjectMap
+><Comments
+></Comments
+><DestinationObjectName
+>MMOrderEntryOut</DestinationObjectName
+><Name
+>TLU EAI Order Entry IO</Name
+><SourceObjectName
+>TLU EAI Order Entry IO</SourceObjectName
+><ListOfEaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>Com Invoice Profile</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>TLU EAI Com Invoice Profile</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI Com Invoice Profile</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>TLU Num Ref</DestinationFieldName
+><SourceFieldExpression
+>IIf([TLU Num Ref] IS NULL OR [TLU Num Ref]=&quot;N.A.&quot;, &quot;N.A.&quot;, [TLU Num Ref])</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bank Authorization flag</DestinationFieldName
+><SourceFieldExpression
+>[Bank Authorization flag]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bank Branch</DestinationFieldName
+><SourceFieldExpression
+>[Bank Branch]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bank Name</DestinationFieldName
+><SourceFieldExpression
+>[Bank Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bank Routing Number</DestinationFieldName
+><SourceFieldExpression
+>[Bank Routing Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bill Cycle</DestinationFieldName
+><SourceFieldExpression
+>[Bill Cycle]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bill Frequency</DestinationFieldName
+><SourceFieldExpression
+>[Bill Frequency]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bill Source</DestinationFieldName
+><SourceFieldExpression
+>[Bill Source]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Bill Type</DestinationFieldName
+><SourceFieldExpression
+>[Bill Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Comments</DestinationFieldName
+><SourceFieldExpression
+>[Comments]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[Conflict Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Created By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Block Flag</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Block Flag]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Block Reason</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Block Reason]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Category</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Category]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Expiration Date</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Expiration Date]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Expiration Month</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Expiration Month]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Expiration Year</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Expiration Year]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Name</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Number</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Security Code</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Security Code]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Card Type</DestinationFieldName
+><SourceFieldExpression
+>[Credit Card Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Days To Cash</DestinationFieldName
+><SourceFieldExpression
+>[Days To Cash]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Due Date</DestinationFieldName
+><SourceFieldExpression
+>[Due Date]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Email Bill To</DestinationFieldName
+><SourceFieldExpression
+>[Email Bill To]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Exento Interes Demora</DestinationFieldName
+><SourceFieldExpression
+>[Exento Interes Demora]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>External Billing Account Number</DestinationFieldName
+><SourceFieldExpression
+>[External Billing Account Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Media Type</DestinationFieldName
+><SourceFieldExpression
+>[Media Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Name</DestinationFieldName
+><SourceFieldExpression
+>[Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Payer Account</DestinationFieldName
+><SourceFieldExpression
+>[Payer Account]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Payer Account Number</DestinationFieldName
+><SourceFieldExpression
+>[Payer Account Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Uso CFDI</DestinationFieldName
+><SourceFieldExpression
+>[Uso CFDI]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Payment Type</DestinationFieldName
+><SourceFieldExpression
+>[Payment Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Updated]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Updated By]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>MM EAI Order Entry - Orders</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>TLU EAI Order Entry - Orders_to_MM EAI Order Entry - Orders</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI Order Entry - Orders</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Created By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Updated]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Updated By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[Conflict Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>operation</DestinationFieldName
+><SourceFieldExpression
+>[operation]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>searchspec</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Approved By - Emp Login</DestinationFieldName
+><SourceFieldExpression
+>[Approved By - Emp Login]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Approved By Date</DestinationFieldName
+><SourceFieldExpression
+>[Approved By Date]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Comments</DestinationFieldName
+><SourceFieldExpression
+>[Comments]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM SR Area</DestinationFieldName
+><SourceFieldExpression
+>[MM SR Area]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM SR Sub Area</DestinationFieldName
+><SourceFieldExpression
+>[MM SR Sub Area]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM SR Type</DestinationFieldName
+><SourceFieldExpression
+>[MM SR Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM Vertical Development Flg</DestinationFieldName
+><SourceFieldExpression
+>[MM Vertical Development Flg]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Opty Id</DestinationFieldName
+><SourceFieldExpression
+>[Opty Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Order Number</DestinationFieldName
+><SourceFieldExpression
+>[Order Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Order Type</DestinationFieldName
+><SourceFieldExpression
+>[Order Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Price List</DestinationFieldName
+><SourceFieldExpression
+>[Price List]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Organization</DestinationFieldName
+><SourceFieldExpression
+>[Primary Organization]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Requested Ship Date</DestinationFieldName
+><SourceFieldExpression
+>[Requested Ship Date]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Revision</DestinationFieldName
+><SourceFieldExpression
+>[Revision]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Sales Manager First Name</DestinationFieldName
+><SourceFieldExpression
+>[Sales Manager First Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Sales Manager Last Name</DestinationFieldName
+><SourceFieldExpression
+>[Sales Manager Last Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Request Id</DestinationFieldName
+><SourceFieldExpression
+>[Service Request Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Status</DestinationFieldName
+><SourceFieldExpression
+>[Status]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Current Order Total Net Price NRC</DestinationFieldName
+><SourceFieldExpression
+>[Current Order Total Net Price NRC]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM Multiservice Address Flag</DestinationFieldName
+><SourceFieldExpression
+>N</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MRC Order Total</DestinationFieldName
+><SourceFieldExpression
+>[MRC Order Total]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Order Total</DestinationFieldName
+><SourceFieldExpression
+>[Order Total]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Sales Manager Id</DestinationFieldName
+><SourceFieldExpression
+>[Sales Manager Id]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>MM EAI Order Entry - Line Items</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>Line Items</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI Order Entry - Line Items</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>TLU Medio de Acceso</DestinationFieldName
+><SourceFieldExpression
+>[TLU Medio de Acceso]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>TLU Periodo Contrato</DestinationFieldName
+><SourceFieldExpression
+>[TLU Periodo Contrato]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Price Type</DestinationFieldName
+><SourceFieldExpression
+>[Price Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>TLU Product Description</DestinationFieldName
+><SourceFieldExpression
+>[Product Description]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Unit of Measure</DestinationFieldName
+><SourceFieldExpression
+>IIf([Price Type] = &apos;Recurrente&apos;,IIf([TLU Plazo de Facturacion] IS NOT NULL, [TLU Plazo de Facturacion], [Unit of Measure]),[Unit of Measure])</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Prod Prom Id</DestinationFieldName
+><SourceFieldExpression
+>[Root Order Item Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Root Order Item Id</DestinationFieldName
+><SourceFieldExpression
+>[Root Order Item Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Root Order Item Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Root Order Item Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Root Order Item Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>operation</DestinationFieldName
+><SourceFieldExpression
+>IIf([Product Id]=&apos;1-FC3WM&apos; AND [Action Code]=&apos;-&apos; AND IIF(BCHasRows (&quot;Order Entry&quot;, &quot;Order Entry - Line Items&quot;, &quot;[Action Code]&lt;&gt;&apos;-&apos; AND [Root Order Item Id]=&apos;&quot; + [Row Id] + &quot;&apos;&quot;, All),&quot;Y&quot;,&quot;N&quot;)=&quot;Y&quot;, &quot;Actualizar&quot;, [Action Code])</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>searchspec</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Action Code</DestinationFieldName
+><SourceFieldExpression
+>IIf([Product Id]=&apos;1-FC3WM&apos; AND [Action Code]=&apos;-&apos; AND IIF(BCHasRows (&quot;Order Entry&quot;, &quot;Order Entry - Line Items&quot;, &quot;[Action Code]&lt;&gt;&apos;-&apos; AND [Root Order Item Id]=&apos;&quot; + [Row Id] + &quot;&apos;&quot;, All),&quot;Y&quot;,&quot;N&quot;)=&quot;Y&quot;, &quot;Actualizar&quot;, [Action Code])</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service End Date</DestinationFieldName
+><SourceFieldExpression
+>[Service End Date]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Start Date</DestinationFieldName
+><SourceFieldExpression
+>[Service Start Date]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Asset Integration Id</DestinationFieldName
+><SourceFieldExpression
+>[Asset Integration Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Billing Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Billing Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Currency Code</DestinationFieldName
+><SourceFieldExpression
+>[Currency Code]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Description</DestinationFieldName
+><SourceFieldExpression
+>[Description]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Extended Quantity</DestinationFieldName
+><SourceFieldExpression
+>[Extended Quantity]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Integration Id</DestinationFieldName
+><SourceFieldExpression
+>[Integration Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Line Number</DestinationFieldName
+><SourceFieldExpression
+>[Line Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Line Number 2</DestinationFieldName
+><SourceFieldExpression
+>[Line Number 2]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Net Price</DestinationFieldName
+><SourceFieldExpression
+>[Net Price]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Parent Order Item Id</DestinationFieldName
+><SourceFieldExpression
+>[Parent Order Item Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Previous Billing Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Previous Billing Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Previous Net Price</DestinationFieldName
+><SourceFieldExpression
+>[Previous Net Price]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Previous Service Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Previous Service Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Product</DestinationFieldName
+><SourceFieldExpression
+>IIf([TLU Description BB] IS NOT NULL, [TLU Description BB], [Product])</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Product Id</DestinationFieldName
+><SourceFieldExpression
+>[Product Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Product Type</DestinationFieldName
+><SourceFieldExpression
+>[Product Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Quantity Requested</DestinationFieldName
+><SourceFieldExpression
+>[Quantity Requested]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Account</DestinationFieldName
+><SourceFieldExpression
+>[Service Account]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Id</DestinationFieldName
+><SourceFieldExpression
+>[Service Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Instance</DestinationFieldName
+><SourceFieldExpression
+>[Service Instance]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Type</DestinationFieldName
+><SourceFieldExpression
+>[Service Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Status</DestinationFieldName
+><SourceFieldExpression
+>[Status]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM Part Number</DestinationFieldName
+><SourceFieldExpression
+>[MM Part Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM Provisioning</DestinationFieldName
+><SourceFieldExpression
+>&quot;Sin Aprovisionamiento&quot;</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>MM Seguimiento como activo</DestinationFieldName
+><SourceFieldExpression
+>&quot;Y&quot;</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Req Compra</DestinationFieldName
+><SourceFieldExpression
+>N</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Quantity</DestinationFieldName
+><SourceFieldExpression
+>[Quantity]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Service Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Service Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>TLU Previous Promotion Id</DestinationFieldName
+><SourceFieldExpression
+>[TLU Previous Promotion Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Tipo Movimiento</DestinationFieldName
+><SourceFieldExpression
+>[Tipo Movimiento]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>First Invoice Flag</DestinationFieldName
+><SourceFieldExpression
+>[First Invoice Flag]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>MM EAI Order Item XA</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>XA</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI Order Item XA</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Value</DestinationFieldName
+><SourceFieldExpression
+>[Value]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Created By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Updated]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[Conflict Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>operation</DestinationFieldName
+><SourceFieldExpression
+>[operation]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>searchspec</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Action Code</DestinationFieldName
+><SourceFieldExpression
+>[Action Code]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Attribute Id</DestinationFieldName
+><SourceFieldExpression
+>[Attribute Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Data Type</DestinationFieldName
+><SourceFieldExpression
+>[Data Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Description</DestinationFieldName
+><SourceFieldExpression
+>[Description]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Name</DestinationFieldName
+><SourceFieldExpression
+>[Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Updated By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Previous Value</DestinationFieldName
+><SourceFieldExpression
+>[Previous Value]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>Account</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>Account</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI Account</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Verifier Digit</DestinationFieldName
+><SourceFieldExpression
+>[Verifier Digit]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Agent Collector</DestinationFieldName
+><SourceFieldExpression
+>[Agent Collector]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Emisor de Factura</DestinationFieldName
+><SourceFieldExpression
+>[Emisor de Factura]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Credit Type Calc</DestinationFieldName
+><SourceFieldExpression
+>[Credit Type Calc]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Contact Id</DestinationFieldName
+><SourceFieldExpression
+>[Primary Contact Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Company Credit Score</DestinationFieldName
+><SourceFieldExpression
+>5000</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Emisor de Cuenta y Orden</DestinationFieldName
+><SourceFieldExpression
+>[Emisor de Cuenta y Orden]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Created By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Updated]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Updated By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[Conflict Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>operation</DestinationFieldName
+><SourceFieldExpression
+>[operation]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>searchspec</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Status</DestinationFieldName
+><SourceFieldExpression
+>[Account Status]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Type Code</DestinationFieldName
+><SourceFieldExpression
+>[Account Type Code]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Integration Id</DestinationFieldName
+><SourceFieldExpression
+>[Integration Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Location</DestinationFieldName
+><SourceFieldExpression
+>[Location]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Main Fax Number</DestinationFieldName
+><SourceFieldExpression
+>[Main Fax Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Main Phone Number</DestinationFieldName
+><SourceFieldExpression
+>[Main Phone Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Market Class</DestinationFieldName
+><SourceFieldExpression
+>[Market Class]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Name</DestinationFieldName
+><SourceFieldExpression
+>[Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Parent Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Parent Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Address Id</DestinationFieldName
+><SourceFieldExpression
+>[Primary Address Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Bill To Address Id</DestinationFieldName
+><SourceFieldExpression
+>[Primary Bill To Address Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Organization</DestinationFieldName
+><SourceFieldExpression
+>[Primary Organization]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Ship To Address Id</DestinationFieldName
+><SourceFieldExpression
+>[Primary Ship To Address Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Type</DestinationFieldName
+><SourceFieldExpression
+>[Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Number</DestinationFieldName
+><SourceFieldExpression
+>[Account Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Plaza</DestinationFieldName
+><SourceFieldExpression
+>[Plaza]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>RFC</DestinationFieldName
+><SourceFieldExpression
+>[Tax ID Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Currency Code</DestinationFieldName
+><SourceFieldExpression
+>[Currency Code]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>Contact</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>Contact</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI Contact</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Created By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Updated]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Updated By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[Conflict Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>operation</DestinationFieldName
+><SourceFieldExpression
+>[operation]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>searchspec</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Integration Id</DestinationFieldName
+><SourceFieldExpression
+>[Account Integration Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Email Address</DestinationFieldName
+><SourceFieldExpression
+>[Email Address]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Employee Number</DestinationFieldName
+><SourceFieldExpression
+>[Employee Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>First Name</DestinationFieldName
+><SourceFieldExpression
+>[First Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Last Name</DestinationFieldName
+><SourceFieldExpression
+>[Last Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Middle Name</DestinationFieldName
+><SourceFieldExpression
+>[Middle Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Person UId</DestinationFieldName
+><SourceFieldExpression
+>[Person UId]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Personal Contact</DestinationFieldName
+><SourceFieldExpression
+>[Personal Contact]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Account Name</DestinationFieldName
+><SourceFieldExpression
+>[Primary Account Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Organization</DestinationFieldName
+><SourceFieldExpression
+>[Primary Organization]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Type</DestinationFieldName
+><SourceFieldExpression
+>[Type]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Work Phone #</DestinationFieldName
+><SourceFieldExpression
+>[Work Phone #]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>CUT Address</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>CUT Address</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>TLU EAI CUT Address</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created</DestinationFieldName
+><SourceFieldExpression
+>[Created]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Created By</DestinationFieldName
+><SourceFieldExpression
+>[Created By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated</DestinationFieldName
+><SourceFieldExpression
+>[Updated]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Updated By</DestinationFieldName
+><SourceFieldExpression
+>[Updated By]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Conflict Id</DestinationFieldName
+><SourceFieldExpression
+>[Conflict Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Mod Id</DestinationFieldName
+><SourceFieldExpression
+>[Mod Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>operation</DestinationFieldName
+><SourceFieldExpression
+>[operation]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>searchspec</DestinationFieldName
+><SourceFieldExpression
+>[searchspec]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Account Id</DestinationFieldName
+><SourceFieldExpression
+>[Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Address Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Address Name</DestinationFieldName
+><SourceFieldExpression
+>[Address Name]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>City</DestinationFieldName
+><SourceFieldExpression
+>[City]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Country</DestinationFieldName
+><SourceFieldExpression
+>[Country]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>County</DestinationFieldName
+><SourceFieldExpression
+>[County]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Postal Code</DestinationFieldName
+><SourceFieldExpression
+>[Postal Code]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Row Id</DestinationFieldName
+><SourceFieldExpression
+>[Row Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>State</DestinationFieldName
+><SourceFieldExpression
+>[Full State]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Street Address</DestinationFieldName
+><SourceFieldExpression
+>[Street Address]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Between Street</DestinationFieldName
+><SourceFieldExpression
+>[Street Address]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Between Street 2</DestinationFieldName
+><SourceFieldExpression
+>[Street Address 2]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Building</DestinationFieldName
+><SourceFieldExpression
+>[Building]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Colony</DestinationFieldName
+><SourceFieldExpression
+>[Neighborhood]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>External Number</DestinationFieldName
+><SourceFieldExpression
+>[External Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Floor</DestinationFieldName
+><SourceFieldExpression
+>[Floor]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Internal Number</DestinationFieldName
+><SourceFieldExpression
+>[Suite Number]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Node</DestinationFieldName
+><SourceFieldExpression
+>[Node]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Orientation</DestinationFieldName
+><SourceFieldExpression
+>[Orientation]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+><EaiComponentMap
+><Comments
+></Comments
+><DestinationComponentName
+>Account Contact</DestinationComponentName
+><DestinationValidation
+></DestinationValidation
+><Name
+>Account Contact</Name
+><ParentComponentMapName
+></ParentComponentMapName
+><SourceComponentName
+>Account Contact</SourceComponentName
+><SourceSearchSpecification
+></SourceSearchSpecification
+><SourceValidation
+></SourceValidation
+><ListOfEaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Contact Account Integration Id</DestinationFieldName
+><SourceFieldExpression
+>[Account Id]</SourceFieldExpression
+></EaiFieldMap
+><EaiFieldMap
+><Comments
+></Comments
+><DestinationFieldName
+>Primary Contact Id1</DestinationFieldName
+><SourceFieldExpression
+>[Contact Id]</SourceFieldExpression
+></EaiFieldMap
+></ListOfEaiFieldMap
+></EaiComponentMap
+></ListOfEaiComponentMap
+><ListOfEaiMapArgument
+></ListOfEaiMapArgument
+></EaiObjectMap
+></ListOfEaiDataMap
+></SiebelMessage
+>

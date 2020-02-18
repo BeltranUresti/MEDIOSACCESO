@@ -1,0 +1,4751 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<REPOSITORY
+   NAME="Siebel Repository"
+   UPDATED="05/21/2016 13:39:01"
+   UPDATED_BY="SADMIN"
+   CREATED="05/21/2016 13:22:52"
+   CREATED_BY="SADMIN"
+   FIO_PLACEHOLDER_FIO="TRUE">
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ESN"
+	   LOCKED="Y"
+	   LOCKED_DATE="09/26/2017 12:48:48"
+	   NAME="Asset Contract Task"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="JBELTRAN"
+	   UPDATED="09/06/2019 12:46:06"
+	   UPDATED_BY="JBELTRAN"
+	   CREATED="08/26/2005 19:40:00"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<WORKFLOW_PROCESS
+		   DESCRIPTION="This workflow calculates the Net Price by starting from the Start Price, and then applying various discounts including Volume Discounts, Promotion Discounts, Bundle Discounts, Min/Max Price, etc."
+		   EDIT="N"
+		   GROUP="Pricer"
+		   INACTIVE="N"
+		   NAME="Pricing Procedure - Calculate Net Price: 47"
+		   PASS_BY_REF_HIERARCHY_ARGUMENT="N"
+		   PERSISTENT_FREQUENCY="N"
+		   PROCESS_NAME="Pricing Procedure - Calculate Net Price"
+		   REPLICATION_LEVEL="None"
+		   RUNNABLE="N"
+		   STATE_MANAGEMENT_TYPE="STATEFUL"
+		   STATUS="COMPLETED"
+		   VERSION="47"
+		   WEB_SERVICE_ENABLED="N"
+		   WORKFLOW_MODE="Service Flow"
+		   UPDATED="09/02/2019 13:54:52"
+		   UPDATED_BY="JBELTRAN"
+		   CREATED="01/26/2018 15:44:59"
+		   CREATED_BY="JBELTRAN">
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   COMMENTS="Flag indicates whether the PSP cache is enabled or not."
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="VARCHAR"
+			   DEFAULT_STRING="Y"
+			   INOUT="INOUT"
+			   NAME="Cache Enabled"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="VARCHAR"
+			   DEFAULT_STRING="FALSE"
+			   INOUT="OUT"
+			   NAME="CalPromotionCPAdj"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   COMMENTS="Variables that are shared across all rows in Row Set."
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="PROPSET_CHILD"
+			   INOUT="INOUT"
+			   NAME="Context"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   COMMENTS="Rows with Execute Pricing Flag = N. These are not repriced."
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="PROPSET_CHILD"
+			   INOUT="NONE"
+			   NAME="Keep Price Row Set"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="VARCHAR"
+			   DISPLAY_NAME="Process Instance Id"
+			   INOUT="INOUT"
+			   NAME="Process Instance Id"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="VARCHAR"
+			   DEFAULT_STRING="N"
+			   INOUT="INOUT"
+			   NAME="PromoGrpSysPref"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_PROCESS_PROP
+			   ACCESS_MODE="RW"
+			   COMMENTS="The set of line items to reprice."
+			   CORRELATOR_FLAG="N"
+			   DATA_TYPE="PROPSET_CHILD"
+			   INOUT="INOUT"
+			   NAME="Row Set"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+			</WF_PROCESS_PROP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*48 288 120 3369*FillBgClr8*100794878*ArrowEnd1*1"
+			   NAME="% Corp Discount"
+			   SUBPROCESS_NAME="MM Lookup Corp Discount Percent"
+			   TYPE="SUB_PROCESS"
+			   UPDATED="09/02/2019 13:37:20"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="09/02/2019 13:08:36"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P17*156 3124*NPts1*22*P07*120 3124*ToHS1*08*ArrowEnd1*4"
+				   NAME="Connector 11"
+				   TO_STEP_NAME="Billing Term Adjustments"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:20"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:36:16"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="% Corp Discount"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P17*156 3124*NPts1*22*P07*120 3124*ToHS1*08*ArrowEnd1*4"
+					   NAME="Connector 11"
+					   TO_STEP_NAME="Billing Term Adjustments"
+					   UPDATED="09/02/2019 13:37:20"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="09/02/2019 13:36:16"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="1"
+				   TYPE="PROPERTY"
+				   UPDATED="09/02/2019 13:08:36"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:08:36"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:% Corp Discount30"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="3"
+				   TYPE="ARGUMENT"
+				   UPDATED="09/02/2019 13:08:36"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:08:36"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:% Corp Discount40"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="4"
+				   TYPE="ARGUMENT"
+				   UPDATED="09/02/2019 13:08:36"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:08:36"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="2"
+				   TYPE="PROPERTY"
+				   UPDATED="09/02/2019 13:08:36"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:08:36"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*444 168 513 2169*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Account Ctx RC Adjustments Apply"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:44:59"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:44:59"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*480 2344*FrHS1*32*P17*479 2344*NPts1*42*P07*479 2162*P37*480 2524*ToHS1*18*ArrowEnd1*4"
+				   NAME="Connector 6"
+				   TO_STEP_NAME="Account Ctx RC Attribute Adjustment"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Account Ctx RC Adjustments Apply"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*480 2344*FrHS1*32*P17*479 2344*NPts1*42*P07*479 2162*P37*480 2524*ToHS1*18*ArrowEnd1*4"
+					   NAME="Connector 6"
+					   TO_STEP_NAME="Account Ctx RC Attribute Adjustment"
+					   UPDATED="01/26/2018 15:44:59"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:44:59"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="2"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Product-Based Adjustment"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="1"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Adjustment Group"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="3"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   PREFERRED_SEQUENCE="65"
+				   SEQUENCE="11"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="([Effective Start Date] &lt;= {Context.Effective Pricing Date} OR [Effective Start Date] IS NULL) AND ([Effective End Date] IS NULL OR [Effective End Date] &gt;= {Context.Effective Pricing Date})"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Account Ctx RC Adjustments Apply10"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="10"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Account Ctx RC Adjustments Apply9"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="9"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   PREFERRED_SEQUENCE="101"
+				   SEQUENCE="13"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Net Price}={Row.Net Price}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="7"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price}=AdjustPrice({Row.Net Price},{Row.Currency Code},LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;,{Match.Adjustment Type}),{Match.Adjustment Amount},{Match.Currency Code},{Row.Exchange Date})"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 3"
+				   SEQUENCE="8"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} +=New(&quot;Waterfall&quot;,[Adjustment Amount]={Match.Adjustment Amount},[Adjustment Type]={Match.Adjustment Type},[Price]={Row.Net Price},[Currency Code]={Row.Currency Code},[Text]= LookUpMessage(&quot;MM Pricer-Account Discount&quot;)  )"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 4"
+				   PREFERRED_SEQUENCE="103"
+				   SEQUENCE="12"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Dynamic Matrix}={Match.Dynamic Matrix}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="5"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} &lt;&gt; 0 AND {Row.Price Type} = LookupValue(&quot;UNIT_OF_MEASURE&quot;, &apos;Recurring&apos;)"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="4"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="6"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Adjustment Group Name]=&quot;Matriz de Precios - Cuenta&quot; AND ([Product Id]={Row.Product Id} OR [Product Id] = IfNull({Row.QueryForProductId},&quot;&quot;) OR [Product Id] = IfNull({Row.QueryForProductId},&quot;N/A&quot;)  ) AND ([Account Id]={Context.Account Id} OR [Account Id] IS NULL OR [Account Id] = &quot;N/A&quot;) AND ([Plaza]={Row.Plaza} OR [Plaza] IS NULL OR [Plaza] = &quot;N/A&quot;) AND ([Account Market Class]={Row.Market Class} OR [Account Market Class] IS NULL OR [Account Market Class] = &quot;N/A&quot;) AND ([City]={Row.City} OR [City] IS NULL OR [City] = &quot;N/A&quot;)"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*444 84 513 1329*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Account Ctx RC Adjustments Set Criterie"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:44:59"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:44:59"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*32*P17*479 1684*NPts1*22*P07*479 1324*ToHS1*18*ArrowEnd1*4"
+				   NAME="Connector 9"
+				   TO_STEP_NAME="Account Ctx RC Adjustments Apply"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Account Ctx RC Adjustments Set Criterie"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*32*P17*479 1684*NPts1*22*P07*479 1324*ToHS1*18*ArrowEnd1*4"
+					   NAME="Connector 9"
+					   TO_STEP_NAME="Account Ctx RC Adjustments Apply"
+					   UPDATED="01/26/2018 15:44:59"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:44:59"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="9"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Product-Based Adjustment"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="2"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Adjustment Group"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="3"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Account Ctx RC Adjustments Set Criterie10"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="10"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Account Ctx RC Adjustments Set Criterie11"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="11"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 1"
+				   PREFERRED_SEQUENCE="111"
+				   SEQUENCE="4"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.QueryForProductId}={Row.Product Id}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On No Match 1"
+				   PREFERRED_SEQUENCE="131"
+				   SEQUENCE="12"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.QueryForProductId}=&apos;&apos;"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="6"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Price Type} = LookupValue(&quot;UNIT_OF_MEASURE&quot;, &apos;Recurring&apos;)"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="7"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="8"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Adjustment Group Name]=&quot;Matriz de Precios - Cuenta&quot; AND [Product Id]={Row.Product Id} AND ([Plaza]={Row.Plaza} OR [Plaza] IS NULL OR [Plaza] = &quot;N/A&quot;)"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Dynamic Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Apply any adjustments from the pricing matrix attached to the price line item."
+			   DESCRIPTION="Apply any adjustments from the pricing matrix attached to the price line item."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*444 252 516 2929*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Account Ctx RC Attribute Adjustment"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:44:59"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:44:59"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*479 3084*FrHS1*32*P17*480 3084*NPts1*42*P07*480 2922*P37*479 3244*ToHS1*18*ArrowEnd1*4"
+				   NAME="Connector 10"
+				   TO_STEP_NAME="GetFlag"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Account Ctx RC Attribute Adjustment"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*479 3084*FrHS1*32*P17*480 3084*NPts1*42*P07*480 2922*P37*479 3244*ToHS1*18*ArrowEnd1*4"
+					   NAME="Connector 10"
+					   TO_STEP_NAME="GetFlag"
+					   UPDATED="01/26/2018 15:44:59"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:44:59"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="1"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="10"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Dynamic Matrix Name"
+				   SEQUENCE="3"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Dynamic Matrix}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Account Ctx RC Attribute Adjustment11"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="11"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Account Ctx RC Attribute Adjustment12"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="12"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="4"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = IIF ({Match.Matrix Type} = LookupValue (&quot;PSP_DYN_MTRX_TYPE&quot;, &quot;Multiple Dimension&quot;), AdjustPrice({Row.Temp Net Price}, {Row.Currency Code}, LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;, {Match.Adjustment Type}), {Match.Adjustment Amount}, {Match.Currency Code}, {Row.Exchange Date}), {Row.Temp Net Price})"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="5"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Net Price} = IIF ({Match.Matrix Type} = LookupValue (&quot;PSP_DYN_MTRX_TYPE&quot;, &quot;Single Dimension&quot;), {Row.Temp Net Price}, 0)"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 1"
+				   SEQUENCE="6"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = IIF ({Match.Matrix Type} = LookupValue (&quot;PSP_DYN_MTRX_TYPE&quot;, &quot;Single Dimension&quot;),ToNumber({Row.Net Price}) - ToNumber({Row.Temp Net Price}) + AdjustPrice({Row.Temp Net Price}, {Row.Currency Code}, LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;, {Match.Adjustment Type}), {Match.Adjustment Amount}, {Match.Currency Code}, {Row.Exchange Date}), {Row.Net Price})"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 2"
+				   SEQUENCE="7"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Match.Adjustment Amount}, [Adjustment Type] = {Match.Adjustment Type}, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] =  &quot;Reeplazo % de descuento aplicado por default a la plaza (Tier 1)&quot; )"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On No Match 1"
+				   SEQUENCE="8"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Context.Invalid Combination Error Flag} = IIF ({Context.Invalid Combination Error Flag} = &quot;Y&quot;, &quot;Y&quot;,IIF ({Match.Matrix Type} = LookupValue (&quot;PSP_DYN_MTRX_TYPE&quot;, &quot;Multiple Dimension&quot;), {Match.Invalid Combination Error Flag}, &quot;N&quot;))"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="9"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Dynamic Matrix} IS NOT NULL"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="2"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   COMMENTS="Apply Bundle Discounts"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*636 84 700 1249*FillBgClr8*100794878*ArrowEnd1*1"
+			   NAME="Apply Bundle Discounts"
+			   SUBPROCESS_NAME="Pricing Procedure - Aggregate Discount"
+			   TYPE="SUB_PROCESS"
+			   UPDATED="01/26/2018 15:44:59"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:44:59"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*611 1084*FrHS1*02*P17*611 1044*NPts1*42*P07*636 1042*P37*513 1084*ToHS1*28*ArrowEnd1*1"
+				   NAME="NewConn:42-4ONH5"
+				   TO_STEP_NAME="Account Ctx RC Adjustments Set Criterie"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Apply Bundle Discounts"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*611 1084*FrHS1*02*P17*611 1044*NPts1*42*P07*636 1042*P37*513 1084*ToHS1*28*ArrowEnd1*1"
+					   NAME="NewConn:42-4ONH5"
+					   TO_STEP_NAME="Account Ctx RC Adjustments Set Criterie"
+					   UPDATED="01/26/2018 15:44:59"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:44:59"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Apply Bundle Discounts1"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Apply Bundle Discounts2"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Check whether a promotion discount is defined and apply that discount."
+			   DESCRIPTION="Check whether a promotion discount is defined and apply that discount."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*744 84 808 1249*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Apply Promotion Discount"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:44:59"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:44:59"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*764 1244*FrHS1*32*P17*776 1244*NPts1*42*P07*776 1242*P37*764 1564*ToHS1*18*ArrowEnd1*1"
+				   NAME="NewConn:1-3MCLE"
+				   TO_STEP_NAME="Is Promo Group Pricing ON?"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Apply Promotion Discount"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*764 1244*FrHS1*32*P17*776 1244*NPts1*42*P07*776 1242*P37*764 1564*ToHS1*18*ArrowEnd1*1"
+					   NAME="NewConn:1-3MCLE"
+					   TO_STEP_NAME="Is Promo Group Pricing ON?"
+					   UPDATED="01/26/2018 15:44:59"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:44:59"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Type} IS NOT NULL"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Apply Promotion Discount1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Apply Promotion Discount2"
+				   PROPERTY_NAME="PromoGrpSysPref"
+				   SEQUENCE="2"
+				   TYPE="EXPRESSION"
+				   VALUE_SEARCH_SPECIFICATION="SystemPreference(&quot;Enable Promotion Group&quot;)"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = AdjustPrice({Row.Net Price}, {Row.Currency Code}, LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;, {Row.Temp Adjustment Type}), {Row.Temp Adjustment Value}, {Row.Temp Currency Code}, {Row.Exchange Date})"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Temp Adjustment Value}, [Adjustment Type] = {Row.Temp Adjustment Type}, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Product Promotion Adjustment&quot;, [Promotion] = {Row.Promotion}))"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_3"
+				   SEQUENCE="5"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Pricing Commit Type} = {Row.Temp Pricing Commit Type}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Effective Promotion Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*156 288 225 3369*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Billing Term Adjustments"
+			   TYPE="TASK"
+			   UPDATED="09/02/2019 13:50:18"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="09/02/2019 13:35:11"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*10*0*0*0*9*LineWidth1*22*P27*234 3544*FrHS1*22*P17*234 3124*NPts1*52*P07*225 3122*P36*61 3544*ToHS1*12*P46*61 3848*ArrowEnd1*4"
+				   NAME="Connector 12"
+				   TO_STEP_NAME="Set Pricing Adjustment"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:20"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:36:19"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Billing Term Adjustments"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*10*0*0*0*9*LineWidth1*22*P27*234 3544*FrHS1*22*P17*234 3124*NPts1*52*P07*225 3122*P36*61 3544*ToHS1*12*P46*61 3848*ArrowEnd1*4"
+					   NAME="Connector 12"
+					   TO_STEP_NAME="Set Pricing Adjustment"
+					   UPDATED="09/02/2019 13:37:20"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="09/02/2019 13:36:19"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="13"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Product-Based Adjustment"
+				   UPDATED="09/02/2019 13:35:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="6"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Adjustment Group"
+				   UPDATED="09/02/2019 13:35:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="7"
+				   TYPE="PROPERTY"
+				   UPDATED="09/02/2019 13:35:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   PREFERRED_SEQUENCE="65"
+				   SEQUENCE="5"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="([Effective Start Date] &lt;= {Context.Effective Pricing Date} OR [Effective Start Date] IS NULL) AND ([Effective End Date] IS NULL OR [Effective End Date] &gt;= {Context.Effective Pricing Date})"
+				   UPDATED="09/02/2019 13:35:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Billing Term Adjustments14"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="14"
+				   TYPE="ARGUMENT"
+				   UPDATED="09/02/2019 13:36:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Billing Term Adjustments15"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="15"
+				   TYPE="ARGUMENT"
+				   UPDATED="09/02/2019 13:36:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="8"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price}=AdjustPrice({Row.Net Price},{Row.Currency Code},LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;,{Match.Adjustment Type}),{Match.Adjustment Amount},{Match.Currency Code},{Row.Exchange Date})"
+				   UPDATED="09/02/2019 13:35:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="9"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} +=New(&quot;Waterfall&quot;,[Adjustment Amount]={Match.Adjustment Amount},[Adjustment Type]={Match.Adjustment Type},[Price]={Row.Net Price},[Currency Code]={Row.Currency Code},[Text]= &quot;Mensual * Plazo de Facturación&quot;  )"
+				   UPDATED="09/02/2019 13:48:07"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="10"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Price Type} = LookupValue(&quot;UNIT_OF_MEASURE&quot;, &quot;Recurring&quot;)"
+				   UPDATED="09/02/2019 13:50:18"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="11"
+				   TYPE="PROPERTY"
+				   UPDATED="09/02/2019 13:35:11"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="12"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Adjustment Group Name]=&quot;Matriz de Precios - Plazo de Facturación&quot; AND ([Price Type]={Row.Price Type} OR [Price Type] IS NULL  OR [Price Type] =&quot;N/A&quot; ) AND ([TLU Plazo de Facturacion]={Row.TLU Plazo de Facturacion} OR [TLU Plazo de Facturacion] IS NULL OR [TLU Plazo de Facturacion] = &quot;N/A&quot;)"
+				   UPDATED="09/02/2019 13:44:27"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="09/02/2019 13:35:11"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   DESCRIPTION="Covered Asset affects Net Price.  This is different from Covered Product, which affects Start Price.  That&apos;s why this step cannot be included in the Pricing Procedure - Service."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*348 24 412 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Calculate Covered Asset Service Price"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:44:59"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:44:59"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*456 444*NPts1*22*P06*412 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:04-HCOWS"
+				   TO_STEP_NAME="Simple Volume Discount"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Calculate Covered Asset Service Price"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*456 444*NPts1*22*P06*412 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:04-HCOWS"
+					   TO_STEP_NAME="Simple Volume Discount"
+					   UPDATED="01/26/2018 15:44:59"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:44:59"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="FS Product Price Item Details"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Admin Price List"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Price List Id] = {Row.Price List Id}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Calculate Covered Asset Service Price1"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Calculate Covered Asset Service Price2"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Basis Price} = IIF({Match.Price Basis} = LookupValue(&apos;PRICER_TARGET&apos;, &apos;MSRP Price&apos;), {Row.MSRP Price}, IIF({Match.Price Basis} = LookupValue(&apos;PRICER_TARGET&apos;, &apos;Cost&apos;), {Row.Cost Price}, IIF({Match.Price Basis} = LookupValue(&apos;PRICER_TARGET&apos;, &apos;List Price&apos;), {Row.List Price}, IIF({Match.Price Basis} = LookupValue(&apos;PRICER_TARGET&apos;, &apos;Purchase Price&apos;), {Row.Purchase Price}, {Row.Net Price}))))"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = ToNumber({Row.Net Price}) - ToNumber({Row.Temp Basis Price}) + AdjustPrice({Row.Temp Basis Price}, {Row.Currency Code}, LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;, {Match.Price Type}), {Match.Adjustment Value}, {Match.Currency Code}, {Row.Exchange Date})"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Match.Adjustment Value}, [Adjustment Type] = {Match.Price Type}, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Service Product Adjustment&quot;, [Covered Asset Product Name] = {Match.Product Name}))"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Price List Id} IS NOT NULL AND {Row.Product Id} IS NOT NULL AND {Row.Sales Service Flag} = &quot;Y&quot; AND {Row.Covered Asset Product Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Price List Item Id] = {Row.Price List Item Id} AND [Product Id] = {Row.Covered Asset Product Id}"
+				   UPDATED="01/26/2018 15:44:59"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:44:59"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Force the Net Price to be within the Minimum and Maximum defined in the price list item."
+			   DESCRIPTION="Force the Net Price to be within the Minimum and Maximum defined in the price list item."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*348 84 412 1249*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Check Min / Max Price"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*304 1044*NPts1*22*P07*348 1044*ToHS1*28*ArrowEnd1*1"
+				   NAME="NewConn:1-3J9VA"
+				   TO_STEP_NAME="Merge Keep Price = Y"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Check Min / Max Price"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*304 1044*NPts1*22*P07*348 1044*ToHS1*28*ArrowEnd1*1"
+					   NAME="NewConn:1-3J9VA"
+					   TO_STEP_NAME="Merge Keep Price = Y"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Min Price} IS NOT NULL AND (ToNumber({Row.Net Price}) &lt; ToNumber({Row.Min Price}))"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Max Price} IS NOT NULL AND (ToNumber({Row.Net Price}) &gt; ToNumber({Row.Max Price}))"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Check Min / Max Price1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = {Row.Min Price}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Min Price}, [Adjustment Type] = &quot;Price Override&quot;, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Below Minimum&quot;))"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 2_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = {Row.Max Price}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 2_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Max Price}, [Adjustment Type] = &quot;Price Override&quot;, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Above Maximum&quot;))"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*180 468 244 5089*FillBgClr8*167641088*ArrowEnd1*1"
+			   NAME="End"
+			   TYPE="END"
+			   UPDATED="09/02/2019 13:37:18"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*948 84 1017 1239*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Get Promotion Rule Type"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*917 1044*NPts1*22*P07*948 1044*ToHS1*28*ArrowEnd1*4"
+				   NAME="Connector 1"
+				   TO_STEP_NAME="Promotion Discount"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Get Promotion Rule Type"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*917 1044*NPts1*22*P07*948 1044*ToHS1*28*ArrowEnd1*4"
+					   NAME="Connector 1"
+					   TO_STEP_NAME="Promotion Discount"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="ISS Promotion Product Aggregate"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="ISS Promotion"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Get Promotion Rule Type10"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Rule Type} = IIF({Match.Class VodNum} IS NOT NULL,&quot;CompCls&quot;,IIF({Match.Product Line Id} IS NOT NULL,&quot;CompProdLn&quot; , {Row.Rule Type} ))"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Product Line Id} = IIF({Row.Rule Type}=&quot;CompProdLn&quot; , {Match.Product Line Id},{Row.Product Line Id})"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Class Id} = IIF({Row.Rule Type}=&quot;CompCls&quot; , {Match.Class VodNum},{Row.Class Id})"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Prod Prom Rule Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Id] = {Row.Prod Prom Rule Id}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*444 324 513 3729*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="GetFlag"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*32*P17*479 4084*NPts1*22*P07*479 3724*ToHS1*18*ArrowEnd1*4"
+				   NAME="Connector 8"
+				   TO_STEP_NAME="Subscription Term NRC Adjustments"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="GetFlag"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*32*P17*479 4084*NPts1*22*P07*479 3724*ToHS1*18*ArrowEnd1*4"
+					   NAME="Connector 8"
+					   TO_STEP_NAME="Subscription Term NRC Adjustments"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="1"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Internal Product - ISS Admin"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="3"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Admin ISS Product Definition"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="4"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:GetFlag10"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="10"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:GetFlag9"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="9"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="5"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.TEMP Req Custom Price Matrix}= IIF( ({Match.Req Custom Price Matrix} IS NULL OR {Match.Req Custom Price Matrix} = &quot;No Match Row Id&quot;), &quot;N&quot;, {Match.Req Custom Price Matrix} )"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="7"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Price Type} = LookupValue(&quot;UNIT_OF_MEASURE&quot;, &apos;One-Time&apos;)"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="8"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="2"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Id]={Row.Product Id}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r12*24 84 87 1259*FillBgClr8*134348798*ArrowEnd1*1"
+			   NAME="Is AIA enabled?"
+			   TYPE="DECISION_POINT"
+			   UPDATED="09/02/2019 13:37:19"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*10*0*0*0*9*LineWidth1*22*P26*36 1564*FrHS1*32*P16*56 1564*NPts1*52*P06*56 1252*P36*36 3124*ToHS1*02*P46*48 3128*ArrowEnd1*4"
+				   NAME="No"
+				   TO_STEP_NAME="% Corp Discount"
+				   TYPE="DEFAULT"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:19"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Is AIA enabled?"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*10*0*0*0*9*LineWidth1*22*P26*36 1564*FrHS1*32*P16*56 1564*NPts1*52*P06*56 1252*P36*36 3124*ToHS1*02*P46*48 3128*ArrowEnd1*4"
+					   NAME="No"
+					   TO_STEP_NAME="% Corp Discount"
+					   UPDATED="09/02/2019 13:37:19"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   EXPRESSION="(CalPromotionCPAdj All Must Match (Ignore Case)(&apos;TRUE&apos;))"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*193 1564*FrHS1*32*P16*56 1564*NPts1*42*P06*56 1252*P37*193 1804*ToHS1*18*ArrowEnd1*4"
+				   NAME="Yes"
+				   TO_STEP_NAME="Set Price Override"
+				   TYPE="DECISION"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:19"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Is AIA enabled?"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P27*193 1564*FrHS1*32*P16*56 1564*NPts1*42*P06*56 1252*P37*193 1804*ToHS1*18*ArrowEnd1*4"
+					   NAME="Yes"
+					   TO_STEP_NAME="Set Price Override"
+					   UPDATED="09/02/2019 13:37:19"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+					<WF_BRANCH_CRITERIA
+					   COMPARE_TO="PROPERTY"
+					   EDIT="Y"
+					   INACTIVE="N"
+					   NAME="Yes1"
+					   OPERATION="EQ_ALL_NC"
+					   PROPERTY_NAME="CalPromotionCPAdj"
+					   SEQUENCE="3"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+						<WF_BRANCH_CRITERIA_VALUE
+						   EDIT="N"
+						   INACTIVE="N"
+						   LO_CHAR1="TRUE"
+						   NAME="Yes11"
+						   SEQUENCE="1"
+						   UPDATED="01/26/2018 15:45:00"
+						   UPDATED_BY="JBELTRAN"
+						   CREATED="01/26/2018 15:45:00"
+						   CREATED_BY="JBELTRAN">
+						</WF_BRANCH_CRITERIA_VALUE>
+					</WF_BRANCH_CRITERIA>
+				</WF_STEP_BRANCH>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*720 156 807 1969*FillBgClr8*134348798*ArrowEnd1*1"
+			   NAME="Is Promo Group Pricing ON?"
+			   TYPE="DECISION_POINT"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*11*0*0*0*6*TxtPos1*19*LineWidth1*22*P27*710 1044*FrHS1*02*P17*710 1764*NPts1*42*P07*720 1767*TxtPerc2*552*P37*700 1044*ToHS1*28*ArrowEnd1*4"
+				   NAME="No"
+				   TO_STEP_NAME="Apply Bundle Discounts"
+				   TYPE="DEFAULT"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Is Promo Group Pricing ON?"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*11*0*0*0*6*TxtPos1*19*LineWidth1*22*P27*710 1044*FrHS1*02*P17*710 1764*NPts1*42*P07*720 1767*TxtPerc2*552*P37*700 1044*ToHS1*28*ArrowEnd1*4"
+					   NAME="No"
+					   TO_STEP_NAME="Apply Bundle Discounts"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   EXPRESSION="(PromoGrpSysPref All Must Match (Ignore Case)(&apos;Yes&apos;))"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*10*0*0*0*6*TxtPos1*19*LineWidth1*22*P27*668 2184*FrHS1*32*P17*764 2184*NPts1*42*P07*764 1962*P37*668 1944*ToHS1*38*ArrowEnd1*4"
+				   NAME="Yes"
+				   TO_STEP_NAME="Promotion Group Discount"
+				   TYPE="DECISION"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Is Promo Group Pricing ON?"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*10*0*0*0*6*TxtPos1*19*LineWidth1*22*P27*668 2184*FrHS1*32*P17*764 2184*NPts1*42*P07*764 1962*P37*668 1944*ToHS1*38*ArrowEnd1*4"
+					   NAME="Yes"
+					   TO_STEP_NAME="Promotion Group Discount"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+					<WF_BRANCH_CRITERIA
+					   COMPARE_TO="PROPERTY"
+					   EDIT="Y"
+					   INACTIVE="N"
+					   NAME="Yes1"
+					   OPERATION="EQ_ALL_NC"
+					   PROPERTY_NAME="PromoGrpSysPref"
+					   SEQUENCE="3"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+						<WF_BRANCH_CRITERIA_VALUE
+						   EDIT="N"
+						   INACTIVE="N"
+						   LO_CHAR1="Yes"
+						   NAME="Yes11"
+						   SEQUENCE="1"
+						   UPDATED="01/26/2018 15:45:00"
+						   UPDATED_BY="JBELTRAN"
+						   CREATED="01/26/2018 15:45:00"
+						   CREATED_BY="JBELTRAN">
+						</WF_BRANCH_CRITERIA_VALUE>
+					</WF_BRANCH_CRITERIA>
+				</WF_STEP_BRANCH>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Split Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Do not price line items with the Exclude From Pricing Flag set to Y."
+			   DESCRIPTION="Do not price line items with the Exclude From Pricing Flag set to Y."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*240 24 304 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Keep Price = Y?"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*348 444*NPts1*22*P06*304 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:1-3JA6Q"
+				   TO_STEP_NAME="Calculate Covered Asset Service Price"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Keep Price = Y?"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*348 444*NPts1*22*P06*304 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:1-3JA6Q"
+					   TO_STEP_NAME="Calculate Covered Asset Service Price"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Exclude Pricing Flag} = &apos;Y&apos; OR {Row.Unit Price} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Keep Price = Y?1"
+				   OUTPUT_ARG="True Row Set"
+				   PROPERTY_NAME="Keep Price Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Keep Price = Y?2"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="True Row Set"
+				   PROPERTY_NAME="Keep Price Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Apply product promotion discount."
+			   DESCRIPTION="Apply product promotion discount."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*852 24 916 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Look-Up Promotion CP Adjustment"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P28*1042 1044*FrHS1*22*P17*1042 444*NPts1*42*P06*916 442*P38*1017 1044*ToHS1*28*ArrowEnd1*1"
+				   NAME="NewConn:88-6YOPU"
+				   TO_STEP_NAME="Get Promotion Rule Type"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Look-Up Promotion CP Adjustment"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P28*1042 1044*FrHS1*22*P17*1042 444*NPts1*42*P06*916 442*P38*1017 1044*ToHS1*28*ArrowEnd1*1"
+					   NAME="NewConn:88-6YOPU"
+					   TO_STEP_NAME="Get Promotion Rule Type"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Promotion Config Item"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Price Adjustment"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Start Date] &lt;= {Context.Effective Pricing Date} AND ([End Date] &gt; {Context.Effective Pricing Date} OR [End Date] IS NULL)"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Look-Up Promotion CP Adjustment1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Look-Up Promotion CP Adjustment2"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Type} = {Match.Adjustment Type}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Value} = {Match.Adjustment Value}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Promotion} = {Match.Promotion Name}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Prom Comp Discount Applied} = &apos;Y&apos;"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 5"
+				   SEQUENCE="6"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Pricing Commit Type} = {Match.Pricing Commit Type}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Effective Promotion Id} IS NOT NULL AND {Row.Root Product Id} IS NOT NULL AND {Row.Product Id} IS NOT NULL AND {Row.Product Port Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Product Id] = {Row.Product Id} AND [Parent Product Item Orig Id] = {Row.Product Port Id} AND [Promotion Id] = {Row.Effective Promotion Id} AND [Complex Product Root Id] = {Row.Root Product Id}"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Apply line item and header level manual discounts."
+			   DESCRIPTION="Apply line item and header level manual discounts."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*132 84 196 1249*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Manual Adjustment"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:00"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:00"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P16*87 1044*NPts1*22*P07*132 1044*ToHS1*28*ArrowEnd1*1"
+				   NAME="NewConn:1-3J9O5"
+				   TO_STEP_NAME="Is AIA enabled?"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Manual Adjustment"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P16*87 1044*NPts1*22*P07*132 1044*ToHS1*28*ArrowEnd1*1"
+					   NAME="NewConn:1-3J9O5"
+					   TO_STEP_NAME="Is AIA enabled?"
+					   UPDATED="01/26/2018 15:45:00"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:00"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Unit Price} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Discount Amount} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Discount Percent} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Context.Discount Percent} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 5"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Context.Discount Percent} IS NULL AND CalPromotionCPAdj"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Manual Adjustment1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Manual Adjustment2"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Default 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Manual Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Default 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Header Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Manual Discount Amount} = ToNumber({Row.Net Price}) - ToNumber({Row.Unit Price})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = {Row.Unit Price}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Header Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Unit Price}, [Adjustment Type] = LookupValue (&quot;PRICER_CALCULATION_TYPE&quot;, &quot;Price Override&quot;), [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Manual Amount Adjustment&quot;))"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 2_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Manual Discount Amount} = {Row.Discount Amount}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 2_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = ToNumber({Row.Net Price}) - ToNumber({Row.Discount Amount})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 2_3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Header Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 2_4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Discount Amount}, [Adjustment Type] = LookupValue (&quot;PRICER_CALCULATION_TYPE&quot;, &quot;Discount Amount&quot;), [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Manual Amount Adjustment&quot;))"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 3_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Manual Discount Amount} = ToNumber({Row.Net Price}) * ToNumber({Row.Discount Percent}) / 100"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 3_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = ToNumber({Row.Net Price}) * (100 - ToNumber({Row.Discount Percent})) / 100"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 3_3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Header Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 3_4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Discount Percent}, [Adjustment Type] = LookupValue (&quot;PRICER_CALCULATION_TYPE&quot;, &quot;% Discount&quot;), [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Manual % Adjustment&quot;))"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 4_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Header Discount Amount} = ToNumber({Row.Net Price}) * ToNumber({Context.Discount Percent}) / 100"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 4_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Manual Discount Amount} = {Row.Header Discount Amount}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 4_3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = ToNumber({Row.Net Price}) * (100 - ToNumber({Context.Discount Percent})) / 100"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 4_4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Context.Discount Percent}, [Adjustment Type] = LookupValue (&quot;PRICER_CALCULATION_TYPE&quot;, &quot;% Discount&quot;), [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Manual % Header Adjustment&quot;))"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 5_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Manual Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 5_2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Header Discount Amount} = 0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:00"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:00"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Merge Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Merge priced and unpriced line items."
+			   DESCRIPTION="Merge priced and unpriced line items."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*240 84 304 1249*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Merge Keep Price = Y"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:01"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*196 1044*NPts1*22*P07*240 1044*ToHS1*28*ArrowEnd1*1"
+				   NAME="NewConn:04-EA6MX"
+				   TO_STEP_NAME="Manual Adjustment"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Merge Keep Price = Y"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*196 1044*NPts1*22*P07*240 1044*ToHS1*28*ArrowEnd1*1"
+					   NAME="NewConn:04-EA6MX"
+					   TO_STEP_NAME="Manual Adjustment"
+					   UPDATED="01/26/2018 15:45:01"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Merge Keep Price = Y1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Merge Keep Price = Y4"
+				   OUTPUT_ARG="Row Set 1"
+				   PROPERTY_NAME="Keep Price Row Set"
+				   SEQUENCE="4"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set 1"
+				   PROPERTY_NAME="Keep Price Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Before adjustments and discounts, Net Price = Start Price"
+			   DESCRIPTION="Before adjustments and discounts, Net Price = Start Price."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*132 24 196 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Net = Start"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:01"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*240 444*NPts1*22*P06*196 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:42-518GB"
+				   TO_STEP_NAME="Keep Price = Y?"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Net = Start"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*240 444*NPts1*22*P06*196 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:42-518GB"
+					   TO_STEP_NAME="Keep Price = Y?"
+					   UPDATED="01/26/2018 15:45:01"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Net = Start1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Default 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = {Row.Start Price}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Apply product promotion discount."
+			   DESCRIPTION="Apply product promotion discount."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r14*853 84 917 1249*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Promotion Discount"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:01"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*808 1044*NPts1*22*P07*853 1044*ToHS1*28*ArrowEnd1*1"
+				   NAME="NewConn:1-3MBO7"
+				   TO_STEP_NAME="Apply Promotion Discount"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Promotion Discount"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*02*P17*808 1044*NPts1*22*P07*853 1044*ToHS1*28*ArrowEnd1*1"
+					   NAME="NewConn:1-3MBO7"
+					   TO_STEP_NAME="Apply Promotion Discount"
+					   UPDATED="01/26/2018 15:45:01"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="ISS Promotion Pricing Rules Summary"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="ISS Promotion"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Promotion Discount1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Current Type} = &quot;&quot;"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Type} = &quot;&quot;"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Value} = &quot;&quot;"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Currency Code} = &quot;&quot;"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 5"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Promotion} = {Match.Promotion Name}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Use This Adjustment} = IIF (({Row.Product Id} = {Match.Product Id} AND {Row.Rule Type} IS NULL AND {Match.Type} = LookupValue (&quot;PROM_PRI_TYPE_CD&quot;,&quot;Component&quot;)), &quot;Y&quot;, IIF (({Row.Product Line Id} = {Match.Product Line Id} AND {Row.Rule Type} = &quot;CompProdLn&quot; AND {Match.Type} = LookupValue (&quot;PROM_PRI_TYPE_CD&quot;,&quot;Aggregate - Conditional&quot;)), &quot;Y&quot;,IIF (({Row.Class Id} = {Match.Class Id} AND {Row.Rule Type} = &quot;CompCls&quot; AND {Match.Type} = LookupValue (&quot;PROM_PRI_TYPE_CD&quot;,&quot;Aggregate - Conditional&quot;)),&quot;Y&quot;, IIF ({Match.Type} = LookupValue (&quot;PROM_PRI_TYPE_CD&quot;,&quot;Aggregate - Default&quot;) AND {Row.Temp Current Type} IS NULL, &quot;Y&quot;, &quot;N&quot;))))"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Current Type} = IIF ({Row.Temp Use This Adjustment} = &quot;Y&quot;, {Match.Type}, {Row.Temp Current Type})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Type} = IIF ({Row.Temp Use This Adjustment} = &quot;Y&quot;, {Match.Adjustment Type}, {Row.Temp Adjustment Type})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Adjustment Value} = IIF ({Row.Temp Use This Adjustment} = &quot;Y&quot;, {Match.Adjustment Value}, {Row.Temp Adjustment Value})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 5"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Currency Code} = IIF ({Row.Temp Use This Adjustment} = &quot;Y&quot;, {Match.Currency Code}, {Row.Temp Currency Code})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 6"
+				   SEQUENCE="7"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Type} = {Row.Pricing Commit Type}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 7"
+				   SEQUENCE="8"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Pricing Commit Type} = IIF (({Row.Temp Use This Adjustment} = &quot;Y&quot; AND {Row.Temp Adjustment Type} IS NOT NULL AND ({Row.Temp Adjustment Value} IS NOT NULL AND {Row.Temp Adjustment Value} &lt;&gt; 0)), {Match.Pricing Commit Type}, {Row.Temp Type})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Effective Promotion Id} IS NOT NULL AND ({Row.Temp Prom Comp Discount Applied} &lt;&gt; &apos;Y&apos; or {Row.Temp Prom Comp Discount Applied} IS NULL)"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Promotion Id] = {Row.Effective Promotion Id}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*636 156 700 1949*FillBgClr8*100794878*ArrowEnd1*1"
+			   NAME="Promotion Group Discount"
+			   SUBPROCESS_NAME="Pricing Procedure - Promotion Group Discount"
+			   TYPE="SUB_PROCESS"
+			   UPDATED="01/26/2018 15:45:01"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*12*P17*668 1244*NPts1*22*P07*668 1564*ToHS1*38*ArrowEnd1*4"
+				   NAME="Connector 3"
+				   TO_STEP_NAME="Apply Bundle Discounts"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Promotion Group Discount"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*12*P17*668 1244*NPts1*22*P07*668 1564*ToHS1*38*ArrowEnd1*4"
+					   NAME="Connector 3"
+					   TO_STEP_NAME="Apply Bundle Discounts"
+					   UPDATED="01/26/2018 15:45:01"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Promotion Group Discount2"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*156 180 230 2289*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Set Price Override"
+			   TYPE="TASK"
+			   UPDATED="09/02/2019 13:37:20"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P26*84 2534*FrHS1*32*P17*193 2534*NPts1*42*P07*193 2282*P36*84 2884*ToHS1*18*ArrowEnd1*4"
+				   NAME="Connector 5"
+				   TO_STEP_NAME="% Corp Discount"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:20"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Set Price Override"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P26*84 2534*FrHS1*32*P17*193 2534*NPts1*42*P07*193 2282*P36*84 2884*ToHS1*18*ArrowEnd1*4"
+					   NAME="Connector 5"
+					   TO_STEP_NAME="% Corp Discount"
+					   UPDATED="09/02/2019 13:37:20"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 1"
+				   SEQUENCE="1"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Unit Price} IS NOT NULL OR {Row.Discount Amount} IS NOT NULL OR {Row.Discount Percent} IS NOT NULL OR {Row.Temp Pricing Commit Type} = LookupValue(&quot;PRICE_OVERRIDE_TYPE&quot;, &quot;Committed&quot;)"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Set Price Override40"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="4"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_1"
+				   SEQUENCE="2"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Pricing Commit Type} = LookupValue(&quot;PRICE_OVERRIDE_TYPE&quot;, &quot;Committed&quot;)"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="3"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Before adjustments and discounts, Net Price = Start Price"
+			   DESCRIPTION="Before adjustments and discounts, Net Price = Start Price."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*24 384 97 4289*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Set Pricing Adjustment"
+			   TYPE="TASK"
+			   UPDATED="09/02/2019 13:37:20"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*32*P16*61 4684*NPts1*22*P06*61 4284*ToHS1*18*ArrowEnd1*4"
+				   NAME="Connector 4"
+				   TO_STEP_NAME="Update Action Code"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:20"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Set Pricing Adjustment"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*32*P16*61 4684*NPts1*22*P06*61 4284*ToHS1*18*ArrowEnd1*4"
+					   NAME="Connector 4"
+					   TO_STEP_NAME="Update Action Code"
+					   UPDATED="09/02/2019 13:37:20"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Set Pricing Adjustment1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Default 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Pricing Adjustment Amount} = ToNumber({Row.Start Price}) - ToNumber({Row.Net Price}) - ToNumber({Row.Manual Discount Amount})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Default 2"
+				   SEQUENCE="9"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Policy Discount Amount} = {Row.Pricing Adjustment Amount}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Apply the volume discount adjustment that matches the quantity on the line item."
+			   DESCRIPTION="Apply the volume discount adjustment that matches the quantity on the line item."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*456 24 520 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Simple Volume Discount"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:01"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*552 444*NPts1*22*P06*520 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:1-3J9Z2"
+				   TO_STEP_NAME="Simple Volume Discount Upsell"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Simple Volume Discount"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*552 444*NPts1*22*P06*520 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:1-3J9Z2"
+					   TO_STEP_NAME="Simple Volume Discount Upsell"
+					   UPDATED="01/26/2018 15:45:01"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:01"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount Item"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Minimum Quantity] &lt;= {Row.Extended Quantity Requested} AND ([Maximum Quantity] &gt;= {Row.Extended Quantity Requested} OR [Maximum Quantity] IS NULL) AND [Volume Discount Start Date] &lt;= {Context.Effective Pricing Date} AND ([Volume Discount End Date] &gt;= {Context.Effective Pricing Date} OR [Volume Discount End Date] IS NULL)"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Simple Volume Discount1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Simple Volume Discount2"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = AdjustPrice({Row.Net Price}, {Row.Currency Code}, LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;, {Match.Adjustment Type}), {Match.Adjustment Amount}, {Match.Volume Discount Currency Code}, {Row.Exchange Date})"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Current Discount} = {Match.Name}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Current Discount Id} = {Match.Id}"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Match.Adjustment Amount}, [Adjustment Type] = {Match.Adjustment Type}, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = LookUpMessage (&quot;Pricer - Simple Volume Discount&quot;, [Volume Discount] = {Match.Name}))"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   COMMENTS="Clear the old value."
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On No Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Current Discount Id} = &apos;&apos;"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   COMMENTS="Clear the old value."
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On No Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Current Discount} = &apos;&apos;"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Volume Discount Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Volume Discount Id] = {Row.Volume Discount Id} AND [Volume Discount Method] = LookupValue(&apos;VOL_DISCNT_METHOD&apos;, &apos;SIMPLE&apos;)"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Step to find out upsell discount information."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*552 24 616 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Simple Volume Discount Upsell"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:01"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:01"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*660 444*NPts1*22*P06*616 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:04ENF-EH466"
+				   TO_STEP_NAME="Tiered Volume Discount"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:01"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:01"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Simple Volume Discount Upsell"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*660 444*NPts1*22*P06*616 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:04ENF-EH466"
+					   TO_STEP_NAME="Tiered Volume Discount"
+					   UPDATED="01/26/2018 15:45:02"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:02"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount Item"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Minimum Quantity] &gt; {Row.Extended Quantity Requested} AND [Volume Discount Start Date] &lt;= {Context.Effective Pricing Date} AND ([Volume Discount End Date] &gt;= {Context.Effective Pricing Date} OR [Volume Discount End Date] IS NULL)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Simple Volume Discount Upsell1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Simple Volume Discount Upsell2"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Next Discount Id} = {Match.Id}"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Next Discount} = {Match.Name}"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Upsell} = LookUpMessage (&quot;Pricer - Simple Volume Discount Upsell&quot;, [Additional Quantity] = ToNumber({Match.Minimum Quantity}) - ToNumber({Row.Extended Quantity Requested}))"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Volume Discount Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Volume Discount Id] = {Row.Volume Discount Id} AND [Volume Discount Method] = LookupValue(&apos;VOL_DISCNT_METHOD&apos;, &apos;SIMPLE&apos;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Sort Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Minimum Quantity"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   COMMENTS="Start"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r11*12 24 76 649*FillBgClr8*167641088*ArrowEnd1*1"
+			   NAME="Start"
+			   TYPE="START"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*8*0*0*0*9*LineWidth1*24*FrHS1*22*P16*132 445*HdTxt1*Y4*NPts1*22*P05*68 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:04-ECI65"
+				   TO_STEP_NAME="Net = Start"
+				   TYPE="DEFAULT"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Start"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*8*0*0*0*9*LineWidth1*24*FrHS1*22*P16*132 445*HdTxt1*Y4*NPts1*22*P05*68 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:04-ECI65"
+					   TO_STEP_NAME="Net = Start"
+					   UPDATED="01/26/2018 15:45:02"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:02"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r15*444 408 513 4569*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Subscription Term NRC Adjustments"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*8*0*0*0*9*LineWidth1*22*P27*380 1244*FrHS1*02*P17*380 4324*NPts1*32*P07*444 4324*ToHS1*38*ArrowEnd1*4"
+				   NAME="Connector 7"
+				   TO_STEP_NAME="Check Min / Max Price"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Subscription Term NRC Adjustments"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*8*0*0*0*9*LineWidth1*22*P27*380 1244*FrHS1*02*P17*380 4324*NPts1*32*P07*444 4324*ToHS1*38*ArrowEnd1*4"
+					   NAME="Connector 7"
+					   TO_STEP_NAME="Check Min / Max Price"
+					   UPDATED="01/26/2018 15:45:02"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:02"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="9"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Product-Based Adjustment"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="2"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Adjustment Group"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="3"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   PREFERRED_SEQUENCE="65"
+				   SEQUENCE="12"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="([Effective Start Date] &lt;= {Context.Effective Pricing Date} OR [Effective Start Date] IS NULL) AND ([Effective End Date] IS NULL OR [Effective End Date] &gt;= {Context.Effective Pricing Date})"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Subscription Term NRC Adjustments10"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="10"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Subscription Term NRC Adjustments11"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="11"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="4"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price}=AdjustPrice({Row.Net Price},{Row.Currency Code},LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;,{Match.Adjustment Type}),{Match.Adjustment Amount},{Match.Currency Code},{Row.Exchange Date})"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="5"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} +=New(&quot;Waterfall&quot;,[Adjustment Amount]={Match.Adjustment Amount},[Adjustment Type]={Match.Adjustment Type},[Price]={Row.Net Price},[Currency Code]={Row.Currency Code},[Text]= &quot;% Descuento en periodo de contratación&quot;  )"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="6"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Price Type} = LookupValue(&quot;UNIT_OF_MEASURE&quot;, &apos;One-Time&apos;) AND ({Row.TEMP Req Custom Price Matrix} = &quot;N&quot; OR {Row.TEMP Req Custom Price Matrix} = &quot;&quot;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="7"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="8"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Adjustment Group Name]=&quot;Matriz de Precios - Contrataciones&quot; AND ([Product Id]={Row.Product Id} OR [Product Id] IS NULL  OR [Product Id] =&quot;N/A&quot; ) AND ([Account Id]={Context.Account Id} OR [Account Id] IS NULL OR [Account Id] = &quot;N/A&quot;) AND ([Plaza]={Row.Plaza} OR [Plaza] IS NULL OR [Plaza] = &quot;N/A&quot;) AND ([TLU Periodo de Contratacion]={Row.TLU Periodo de Contratacion} OR [TLU Periodo de Contratacion] IS NULL OR [TLU Periodo de Contratacion] = &quot;N/A&quot;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Apply tiered volume discounts to the Net Price."
+			   DESCRIPTION="Apply tiered volume discounts to the Net Price."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*660 24 724 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Tiered Volume Discount"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*756 444*NPts1*22*P06*724 444*ToHS1*08*ArrowEnd1*1"
+				   NAME="NewConn:42-4UGHE"
+				   TO_STEP_NAME="Tiered Volume Discount Upsell"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Tiered Volume Discount"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*756 444*NPts1*22*P06*724 444*ToHS1*08*ArrowEnd1*1"
+					   NAME="NewConn:42-4UGHE"
+					   TO_STEP_NAME="Tiered Volume Discount Upsell"
+					   UPDATED="01/26/2018 15:45:02"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:02"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount Item"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Minimum Quantity] &lt;= {Row.Extended Quantity Requested} AND [Volume Discount Start Date] &lt;= {Context.Effective Pricing Date} AND ([Volume Discount End Date] &gt;= {Context.Effective Pricing Date} OR [Volume Discount End Date] IS NULL)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Tiered Volume Discount1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Tiered Volume Discount2"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Extended Line Total} = ToNumber({Row.Net Price}) * (ToNumber({Match.Minimum Quantity}) - 1)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Last Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Extended Line Total} = ToNumber({Row.Temp Extended Line Total}) + IIF (ToNumber({Row.Extended Quantity Requested}) &gt; ToNumber({Match.Maximum Quantity}) AND {Match.Maximum Quantity} IS NOT NULL, (ToNumber({Row.Extended Quantity Requested}) - ToNumber({Match.Maximum Quantity})) * {Row.Net Price}, 0)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Last Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} = ToNumber({Row.Temp Extended Line Total}) / ToNumber({Row.Extended Quantity Requested})"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Last Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row}.{Net Price Waterfall} += New(&quot;Waterfall&quot;, [Adjustment Amount] = {Row.Net Price}, [Adjustment Type] = &quot;Price Override&quot;, [Price] = {Row.Net Price}, [Currency Code] = {Row.Currency Code}, [Text] = {Row.Tiered Volume Discount Text})"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Last Match 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Current Discount Id} = {Match.Id}"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Volume Price} = AdjustPrice({Row.Net Price}, {Row.Currency Code}, LookupName(&quot;PRICER_CALCULATION_SIMPLE_TYPE&quot;, {Match.Adjustment Type}), {Match.Adjustment Amount}, {Match.Volume Discount Currency Code}, {Row.Exchange Date})"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Volume Qty} = IIF(ToNumber({Row.Extended Quantity Requested}) &lt; ToNumber({Match.Maximum Quantity}) OR {Match.Maximum Quantity} IS NULL, ToNumber({Row.Extended Quantity Requested}), ToNumber({Match.Maximum Quantity})) - ToNumber({Match.Minimum Quantity}) + 1"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 3"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Temp Extended Line Total} = ToNumber({Row.Temp Extended Line Total}) + (ToNumber({Row.Temp Volume Qty}) * ToNumber({Row.Temp Volume Price}))"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On Match 4"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Tiered Volume Discount Text} = IIF({Row.Tiered Volume Discount Text} IS NULL, LookUpMessage (&quot;Pricer - Tiered Volume Discount&quot;, [Volume Discount] = {Match.Name}, [Volume Qty] = {Row.Temp Volume Qty}), {Row.Tiered Volume Discount Text} + &apos;, &apos; + LookUpMessage (&quot;Pricer - Tiered Volume Discount&quot;, [Volume Discount] = {Match.Name}, [Volume Qty] = {Row.Temp Volume Qty}))"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Volume Discount Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Volume Discount Id] = {Row.Volume Discount Id} AND [Volume Discount Method] = LookupValue(&apos;VOL_DISCNT_METHOD&apos;, &apos;TIERED&apos;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Sort Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Minimum Quantity"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Simple Look-Up Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   COMMENTS="Step to find out upsell discount information."
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*756 24 820 649*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Tiered Volume Discount Upsell"
+			   TYPE="TASK"
+			   UPDATED="01/26/2018 15:45:02"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*852 444*NPts1*22*P06*820 444*ToHS1*08*ArrowEnd1*4"
+				   NAME="Connector 0"
+				   TO_STEP_NAME="Look-Up Promotion CP Adjustment"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Tiered Volume Discount Upsell"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*7*0*0*0*9*LineWidth1*24*FrHS1*22*P16*852 444*NPts1*22*P06*820 444*ToHS1*08*ArrowEnd1*4"
+					   NAME="Connector 0"
+					   TO_STEP_NAME="Look-Up Promotion CP Adjustment"
+					   UPDATED="01/26/2018 15:45:02"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:02"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Component"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount Item"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Business Object"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Volume Discount"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Cache Enabled"
+				   PROPERTY_NAME="Cache Enabled"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="In Memory Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Minimum Quantity] &gt; {Row.Extended Quantity Requested} AND [Volume Discount Start Date] &lt;= {Context.Effective Pricing Date} AND ([Volume Discount End Date] &gt;= {Context.Effective Pricing Date} OR [Volume Discount End Date] IS NULL)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Tiered Volume Discount Upsell1"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Tiered Volume Discount Upsell2"
+				   OUTPUT_ARG="Context"
+				   PROPERTY_NAME="Context"
+				   SEQUENCE="2"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Tiered Volume Discount Upsell30"
+				   PROPERTY_NAME="CalPromotionCPAdj"
+				   SEQUENCE="3"
+				   TYPE="EXPRESSION"
+				   VALUE_SEARCH_SPECIFICATION="SystemPreference(&quot;Enable AIA Comms&quot;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Next Discount Id} = {Match.Id}"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On First Match 2"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Upsell} = LookUpMessage (&quot;Pricer - Simple Volume Discount Upsell&quot;, [Additional Quantity] = ToNumber({Match.Minimum Quantity}) - ToNumber({Row.Extended Quantity Requested}))"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Volume Discount Id} IS NOT NULL"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Search Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="[Volume Discount Id] = {Row.Volume Discount Id} AND [Volume Discount Method] = LookupValue(&apos;VOL_DISCNT_METHOD&apos;, &apos;TIERED&apos;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Sort Specification"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="Minimum Quantity"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+			<WF_STEP
+			   ALLOW_RETRY_FLAG="N"
+			   BUSINESS_SERVICE_METHOD="Conditional Action Transform"
+			   BUSINESS_SERVICE_NAME="Row Set Transformation Toolkit"
+			   EDIT="Y"
+			   EVALUATE_ALL="Y"
+			   INACTIVE="N"
+			   LAYOUT="@0*0*3*0*0*0*1*r13*24 468 97 5109*FillBgClr8*134217218*ArrowEnd1*1"
+			   NAME="Update Action Code"
+			   TYPE="TASK"
+			   UPDATED="09/02/2019 13:37:20"
+			   UPDATED_BY="JBELTRAN"
+			   CREATED="01/26/2018 15:45:02"
+			   CREATED_BY="JBELTRAN">
+				<WF_STEP_BRANCH
+				   EDIT="Y"
+				   EVENT_CANCEL_FLAG="N"
+				   EVENT_VISIBILITY="Enterprise"
+				   INACTIVE="N"
+				   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P26*97 4884*FrHS1*22*P16*97 4894*NPts1*42*P06*97 4892*P37*180 4884*ToHS1*08*ArrowEnd1*4"
+				   NAME="Connector 2"
+				   TO_STEP_NAME="End"
+				   TYPE="CONNECTOR"
+				   USER_EVENT_TIMEOUT="0"
+				   UPDATED="09/02/2019 13:37:20"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+					<WF_BRANCH_CONNECTOR
+					   FROM_STEP_NAME="Update Action Code"
+					   INACTIVE="N"
+					   LAYOUT="@0*0*9*0*0*0*9*LineWidth1*22*P26*97 4884*FrHS1*22*P16*97 4894*NPts1*42*P06*97 4892*P37*180 4884*ToHS1*08*ArrowEnd1*4"
+					   NAME="Connector 2"
+					   TO_STEP_NAME="End"
+					   UPDATED="09/02/2019 13:37:20"
+					   UPDATED_BY="JBELTRAN"
+					   CREATED="01/26/2018 15:45:02"
+					   CREATED_BY="JBELTRAN">
+					</WF_BRANCH_CONNECTOR>
+				</WF_STEP_BRANCH>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Condition 1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Net Price} &lt;&gt; {Row.Previous Net Price} AND {Row.Action Code} = LookupValue(&quot;DELTA_ACTION_CODE&quot;,&quot;Existing&quot;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="O"
+				   NAME="O:Update Action Code10"
+				   OUTPUT_ARG="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="1"
+				   TYPE="ARGUMENT"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="On True 1_1"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.Action Code} = LookupValue(&quot;DELTA_ACTION_CODE&quot;,&quot;Modified&quot;)"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Process Condition"
+				   SEQUENCE="0"
+				   TYPE="LITERAL"
+				   VALUE_SEARCH_SPECIFICATION="{Row.PG Member Adjutment Flag}=&apos;Y&apos;"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+				<WF_STEP_I_O_ARGUMENT
+				   INACTIVE="N"
+				   INPUT_FLAG="I"
+				   NAME="Row Set"
+				   PROPERTY_NAME="Row Set"
+				   SEQUENCE="0"
+				   TYPE="PROPERTY"
+				   UPDATED="01/26/2018 15:45:02"
+				   UPDATED_BY="JBELTRAN"
+				   CREATED="01/26/2018 15:45:02"
+				   CREATED_BY="JBELTRAN">
+				</WF_STEP_I_O_ARGUMENT>
+			</WF_STEP>
+		</WORKFLOW_PROCESS>
+	</PROJECT>
+</REPOSITORY>
+
+
+

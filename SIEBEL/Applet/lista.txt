@@ -1,0 +1,8 @@
+ISS Promotion Form Applet.sif
+lista.txt
+Order Entry - Line Item List Applet (Sales).sif
+Product-Based Adjustment List Applet.sif
+Quote Item Form Applet.sif
+Quote Item List Applet (Pricing).sif
+Quote Item List Applet - Short.sif
+Quote Item List Applet.sif

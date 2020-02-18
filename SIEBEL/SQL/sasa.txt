@@ -1,0 +1,7 @@
+
+dir /b > lista.txt 
+
+
+Se propone agregar un campo a Product que se traslade a quote line en la creacion y con este valor indicar que la cotizacion se debe procesar con
+el nuevo flujo de precios, es decir con este flag se excluiria la ejecucion del plugin y la evaluacion de las reglas de precios que se agregaron para este nuevo flujo de precios
+las antiguas quotes no tendria items marcados con ese flag y ejecutarian las reglas anteriores, otra opcion seria que el flag estuviera en quote y no en quote line pero para marcar las quotes tendriamos que hacer algun update por fechas o algun otro criterio en data loader
